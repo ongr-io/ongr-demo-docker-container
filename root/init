@@ -1,0 +1,16 @@
+#!/bin/sh
+
+until $(curl --output /dev/null --silent --head --fail http://localhost:9200); do
+    sleep 1
+    echo "................................................................................."
+done
+
+cat << "EOF"
+
+    888888ba                             dP
+    88    `8b                            88
+    88     88 .d8888b. 88d888b. .d8888b. 88
+    88     88 88'  `88 88'  `88 88ooood8 dP
+    88    .8P 88.  .88 88    88 88.  ...
+    8888888P  `88888P' dP    dP `88888P' oo
+EOF

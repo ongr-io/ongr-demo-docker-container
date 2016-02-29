@@ -1,0 +1,24 @@
+sudo: required
+language: php
+services:
+  - docker
+
+env:
+  - REPO=https://github.com/ongr-io/Demo.git
+
+before_install:
+  - git clone $REPO temp
+  - cd temp && git fetch --tags
+  - LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+  - git checkout $LATEST_TAG
+  - composer install -n
+  - cd $TRAVIS_BUILD_DIR
+  - mv temp/* root/var/www/
+  - rm -rf temp
+
+install:
+  - docker build -t demo .
+
+script:
+  - docker run -d -p 80:80 --name demo -t demo
+  - docker exec demo bin/phpcs -p --standard=PSR2 --extensions=php ./src
