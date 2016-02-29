@@ -16,6 +16,8 @@ RUN apk add --no-cache  nginx \
                         php-iconv \
                         php-pcntl \
                         openjdk7-jre-base \
+                        sudo \
+                        procps \
                         supervisor
 
 ENV ELASTICSEARCH_VERSION 2.2.0
@@ -25,14 +27,17 @@ RUN \
   wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \
   tar -xzf elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \
   rm -f elasticsearch-$ELASTICSEARCH_VERSION.tar.gz && \
-  mv elasticsearch-$ELASTICSEARCH_VERSION /opt/elasticsearch
+  mv elasticsearch-$ELASTICSEARCH_VERSION /opt/elasticsearch && \
+  adduser -S elasticsearch && \
+  addgroup elasticsearch && \
+  chown -R elasticsearch:elasticsearch /opt/elasticsearch
 
 ADD root /
 
-RUN /opt/elasticsearch/bin/elasticsearch -d && \
+RUN sudo -u elasticsearch /opt/elasticsearch/bin/elasticsearch -d && \
     sleep 20 && \
     php /var/www/bin/console ongr:es:index:create && \
-    php /var/www/bin/console ongr:es:index:import app/Resources/data/demo.json
+    php /var/www/bin/console ongr:es:index:import /var/www/app/Resources/data/demo.json
 
 RUN chmod +x /run.sh /init
 

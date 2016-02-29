@@ -1,0 +1,2 @@
+root/var/www/*
+!root/var/www/.gitkeep
