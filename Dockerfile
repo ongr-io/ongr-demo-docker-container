@@ -18,7 +18,7 @@ RUN apk add --no-cache  nginx \
                         openjdk7-jre-base \
                         supervisor
 
-ENV ELASTICSEARCH_VERSION 1.7.4
+ENV ELASTICSEARCH_VERSION 2.2.0
 RUN \
   mkdir -p /opt && \
   cd /tmp && \
@@ -31,8 +31,8 @@ ADD root /
 
 RUN /opt/elasticsearch/bin/elasticsearch -d && \
     sleep 20 && \
-    php /var/www/app/console ongr:es:index:create && \
-    php /var/www/app/console ongr:es:index:import --raw /var/www/src/ONGR/DemoBundle/Resources/data/ongr.json
+    php /var/www/bin/console ongr:es:index:create && \
+    php /var/www/bin/console ongr:es:index:import app/Resources/data/demo.json
 
 RUN chmod +x /run.sh /init
 
