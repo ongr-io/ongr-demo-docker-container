@@ -1,7 +1,6 @@
-# docker-ongr-demo
-ONGR demo presentation docker image.
+# ONGR demo presentation docker image.
 
-[![Build Status](http://img.shields.io/travis/ongr-io/kitematic/master.svg?style=flat-square)](https://travis-ci.org/ongr-io/kitematic) [![Docker Hub](https://img.shields.io/badge/docker-demo--presentation-blue.svg?style=flat-square)](https://hub.docker.com/r/ongr/demo-presentation/)
+[![Build Status](http://img.shields.io/travis/ongr-io/ongr-demo-docker-container/master.svg?style=flat-square)](https://travis-ci.org/ongr-io/ongr-demo-docker-container) [![Docker Hub](https://img.shields.io/badge/docker-demo--presentation-blue.svg?style=flat-square)](https://hub.docker.com/r/ongr/demo-presentation/)
 
 ## Walkthrough:
 1. Pull the image:
